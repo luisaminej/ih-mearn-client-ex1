@@ -1,24 +1,24 @@
 
 import React, {useState, useEffect, useContext} from 'react'
 
-import ProyectoContext from './../context/proyectos/ProyectoContext'
+import VitaminsContext from '../context/vitamins/VitaminsContext'
 
-export default function Proyectos() {
+export default function Vitamins() {
 
     // 1. USECONTEXT - ESTADO GLOBAL
-    const context = useContext(ProyectoContext)
+    const context = useContext(VitaminsContext)
 
     const { 
-        proyectos,  // LISTADO DE PROYECTOS QUE VIENE DE CONTEXT
+        vitamins,  // LISTADO DE PROYECTOS QUE VIENE DE CONTEXT
         darkMode,  
-        obtenerProyectos,
-        crearProyecto,
-        actualizarProyecto,
-        eliminarProyecto} = context
+        obtenerVitamins,
+        crearVitamins,
+        actualizarVitamins,
+        eliminarVitamins} = context
 
     // 2. USESTATE - ESTADO LOCAL
 
-    const [ nuevoProyecto, setNuevoProyecto ] = useState({
+    const [ newVitamins, setNewVitamins ] = useState({
         nombre: ""
     })
 
@@ -29,7 +29,7 @@ export default function Proyectos() {
 
     useEffect(() => {
         
-        obtenerProyectos()
+        obtenerVitamins()
 
     }, [])
 
@@ -39,8 +39,8 @@ export default function Proyectos() {
         
         event.preventDefault()
 
-        setNuevoProyecto({
-            ...nuevoProyecto,
+        setNewVitamins({
+            ...newVitamins,
             [event.target.name]: event.target.value
         })
 
@@ -52,9 +52,9 @@ export default function Proyectos() {
         event.preventDefault()
 
         // console.log("Enviando datos...", nuevoProyecto)
-        crearProyecto(nuevoProyecto)
+        crearVitamins(newVitamins)
 
-        setNuevoProyecto({
+        setNewVitamins({
             nombre: ""
         })
     }
@@ -66,20 +66,20 @@ export default function Proyectos() {
         
         event.preventDefault()
         setModoEdicion(true)
-        setNuevoProyecto(element)
+        setNewVitamins(element)
 
     }
 
 
-    const editarProyecto = (event) => {
+    const editarVitamins = (event) => { //ESTE ES EL COMPONENTE QUE SE VA COMO DATAFORM
         
         event.preventDefault()
         
-        actualizarProyecto(nuevoProyecto)
+        actualizarVitamins(newVitamins)
 
         setModoEdicion(false)
 
-        setNuevoProyecto({
+        setNewVitamins({
             nombre: ""
         })
 
@@ -88,10 +88,10 @@ export default function Proyectos() {
     // BORRAR PROYECTO
 
 
-    const borrarProyecto = (event, element) => {
+    const borrarVitamins = (event, element) => {
         
         event.preventDefault()
-        eliminarProyecto(element)
+        eliminarVitamins(element)
 
     }
 
@@ -100,7 +100,7 @@ export default function Proyectos() {
 
     return (
         <div>
-            Hola soy todos los proyectos del backend :D
+            Las vitamins del backend \o/
             
             <p>Dark Mode: {
                 darkMode ? "Activado" : "Apagado"
@@ -114,18 +114,18 @@ export default function Proyectos() {
             <hr />
 
             <form onSubmit={ modoEdicion ? 
-                    (e) => editarProyecto(e) : 
+                    (e) => editarVitamins(e) : 
                     (e) => enviarFormulario(e)
                 }>
                 <input 
                     name="nombre"
                     type="text"
-                    value={nuevoProyecto.nombre}
+                    value={newVitamins.nombre}
                     onChange={(e) => { manejarCambios(e) }}
                 />
 
                 <button>
-                    { modoEdicion ? "Editar proyecto" : "Crear proyecto" }
+                    { modoEdicion ? "Editar Vitamins" : "Crear vitamins" }
                 </button>
 
 
@@ -133,18 +133,18 @@ export default function Proyectos() {
 
 
             {
-                proyectos.length === 0 ?
-                "No tengo proyectos"
+                vitamins.length === 0 ?
+                "No tengo vitamins"
                 :
-                proyectos.map((proyecto,i) => {
+                vitamins.map((vitamin,i) => {
                     return(
                         <div key={i}>
 
-                            <p>{proyecto.nombre}</p>
-                            <p>{proyecto._id}</p>
+                            <p>{vitamin.nombre}</p>
+                            <p>{vitamin._id}</p>
 
-                           <button onClick={(evento) => {activarModoEdicion(evento, proyecto)}}>Editar</button>
-                            <button onClick={(evento) => borrarProyecto(evento, proyecto)}>Borrar</button>
+                           <button onClick={(evento) => {activarModoEdicion(evento, vitamin)}}>Editar</button>
+                            <button onClick={(evento) => borrarVitamins(evento, vitamin)}>Borrar</button>
 
                         </div>
                     )

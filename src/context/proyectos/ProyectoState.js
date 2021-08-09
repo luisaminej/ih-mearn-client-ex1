@@ -6,6 +6,7 @@ import axios from 'axios'
 
 const ProyectoState = (props) => {
 
+
     // 1. ESTADO INICIAL
     // SIEMPRE HAGAN UN OBJETO
 
@@ -26,7 +27,24 @@ const ProyectoState = (props) => {
     // 3. FUNCIONES 
     // NOS VAN A AYUDAR A CAPTURAR LOS EVENTOS DE LOS COMPONENTES
 
+
+    const crearProyecto = async (dataForm) => {
+        try {
+            
+            const res = await axios.post("http://localhost:3005/api/proyectos/crear", dataForm)
+
+            obtenerProyectos()
+
+        } catch (error) {
+            
+        }
+
+
+    }
+
+
     const obtenerProyectos = async () => {
+
         try {
 
             const respuesta = await axios.get("http://localhost:3005/api/proyectos")
@@ -40,13 +58,38 @@ const ProyectoState = (props) => {
                 payload: proyectosActualizados
             })
 
-
-
-
         } catch (error) {
 
         }
     }
+
+    const actualizarProyecto = async (dataForm) => {
+
+        const form = {
+            proyectoId: dataForm._id,
+            nombre: dataForm.nombre
+        }
+
+        const res = await axios.post("http://localhost:3005/api/proyectos/actualizar", form)
+
+        obtenerProyectos()
+        
+    }
+
+
+    const eliminarProyecto = async (dataForm) => {
+
+        const form = {
+            proyectoId: dataForm._id
+        }
+
+        const res = await axios.post("`${process.env.REACT_APP_BASE_URL}`/api/proyectos/eliminar", form)
+
+        console.log(res)
+        
+        obtenerProyectos()
+
+    } 
 
 
     // 4. RETORNO DE ESTADO GLOBAL
@@ -59,7 +102,10 @@ const ProyectoState = (props) => {
                     nombre: "Mike",
                     email: "m@mikenieva.com"
                 },
-                obtenerProyectos
+                obtenerProyectos,
+                crearProyecto,
+                actualizarProyecto,
+                eliminarProyecto
             }}
         >
 
