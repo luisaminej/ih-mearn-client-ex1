@@ -85,7 +85,7 @@ const ProyectoState = (props) => {
 
         await axios.post("`${process.env.REACT_APP_BASE_URL}`/api/proyectos/eliminar", form)
 
-        console.log(res)
+       
         
         obtenerProyectos()
 
