@@ -31,7 +31,7 @@ const ProyectoState = (props) => {
     const crearProyecto = async (dataForm) => {
         try {
             
-            const res = await axios.post("http://localhost:3005/api/proyectos/crear", dataForm)
+            await axios.post("http://localhost:3005/api/proyectos/crear", dataForm)
 
             obtenerProyectos()
 
@@ -70,7 +70,7 @@ const ProyectoState = (props) => {
             nombre: dataForm.nombre
         }
 
-        const res = await axios.post("http://localhost:3005/api/proyectos/actualizar", form)
+        await axios.post("http://localhost:3005/api/proyectos/actualizar", form)
 
         obtenerProyectos()
         
@@ -83,7 +83,7 @@ const ProyectoState = (props) => {
             proyectoId: dataForm._id
         }
 
-        const res = await axios.post("`${process.env.REACT_APP_BASE_URL}`/api/proyectos/eliminar", form)
+        await axios.post("`${process.env.REACT_APP_BASE_URL}`/api/proyectos/eliminar", form)
 
         console.log(res)
         

@@ -31,7 +31,7 @@ const VitaminsState = (props) => {
     const crearVitamins = async (dataForm) => {
         try {
             
-            const res = await axios.post("http://localhost:3005/api/vitamins/crear", dataForm)
+             await axios.post("http://localhost:3005/api/vitamins/crear", dataForm)
 
             obtenerVitamins()
 
@@ -70,7 +70,7 @@ const VitaminsState = (props) => {
             nombre: dataForm.nombre
         }
 
-        const res = await axios.post("http://localhost:3005/api/vitamins/actualizar", form)
+         await axios.post("http://localhost:3005/api/vitamins/actualizar", form)
 
         obtenerVitamins()
         

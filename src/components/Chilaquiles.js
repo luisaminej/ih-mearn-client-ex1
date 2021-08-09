@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useContext} from 'react'
 
 import ChilaquilesContext from './../context/chilaquiles/ChilaquilesContext'
 
@@ -86,6 +86,3 @@ export default function Chilaquiles() {
 
 
 
-            {/* <button onClick={(e) => {agregarProyecto(e)}}>
-                Agregar proyecto
-            </button> */}
