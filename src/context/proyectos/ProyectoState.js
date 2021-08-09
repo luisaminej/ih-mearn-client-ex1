@@ -47,7 +47,7 @@ const ProyectoState = (props) => {
 
         try {
 
-            const respuesta = await axios.get("http://localhost:3005/api/proyectos")
+            const respuesta = await axios.get("`${process.env.REACT_APP_BASE_URL}`/api/proyectos")
 
             const proyectosActualizados = respuesta.data
             console.log(proyectosActualizados)
@@ -70,7 +70,7 @@ const ProyectoState = (props) => {
             nombre: dataForm.nombre
         }
 
-        await axios.post("http://localhost:3005/api/proyectos/actualizar", form)
+        await axios.post("`${process.env.REACT_APP_BASE_URL}`/api/proyectos/actualizar", form)
 
         obtenerProyectos()
         
